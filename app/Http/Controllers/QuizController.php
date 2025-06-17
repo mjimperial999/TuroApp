@@ -24,7 +24,6 @@ class QuizController extends Controller
         Session::put("quiz_{$activityID}_started_at", Carbon::now('Asia/Manila'));
         $deadline = Carbon::now('Asia/Manila')->addSeconds($timeLimit);
         Session::put("quiz_{$activityID}_deadline", $deadline);
-
         Session::put("quiz_{$activityID}_in_progress", true);
 
         return redirect("/home-tutor/quiz/{$activityID}/s/q/0");
@@ -51,6 +50,9 @@ class QuizController extends Controller
         }
 
         if (!Session::get("quiz_{$activityID}_in_progress")) {
+            Session::forget("quiz_{$activityID}_questions");
+            Session::forget("quiz_{$activityID}_answers");
+            Session::forget("quiz_{$activityID}_deadline");
             return redirect("/home-tutor/quiz/{$activityID}")
                 ->with('error', 'Quiz has already ended or you accessed an invalid link.');
         }
@@ -110,6 +112,7 @@ class QuizController extends Controller
         if (!$questionIDs || !$deadline) {
             return redirect("/home-tutor/quiz/{$activityID}")
                 ->with('error', 'Invalid quiz session.');
+                
         }
 
         if ($nextIndex < count($questionIDs)) {

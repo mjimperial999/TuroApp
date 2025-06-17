@@ -236,7 +236,7 @@ header("Pragma: no-cache");
                                 <p><?= $question->question_text ?></p>
                             </div>
                             <form class="quiz-interface-forms" method="POST" action="/home-tutor/quiz/<?= $activity->activity_id ?>/s/q/<?= $index ?>">
-                                <input type="hidden" name="_token" value="<?= csrf_token() ?>">
+                                <?= csrf_field() ?>
                                 <div class="quiz-interface-answers">
                                     <?php foreach ($question->options as $option): ?>
                                         <div class="radio-button radio-<?= $class ?>">
