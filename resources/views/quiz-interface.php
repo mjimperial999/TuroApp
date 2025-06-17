@@ -227,11 +227,11 @@ header("Pragma: no-cache");
                         <div class="module-section quiz-interface quiz-background-container <?= $class ?>">
                             <div class="quiz-interface-header">
                                 <div class="quiz-interface-header-question-number">
-                                    <p>QUESTION {{ $index + 1 }}</p>
+                                    <p>QUESTION <?= $index + 1 ?></p>
                                 </div>
                                 <div class="quiz-interface-header-right-side">
                                     <div class="quiz-interface-header-question-total">
-                                        <p>Q{{ $index + 1 }} OF {{ $total }}</p>
+                                        <p>Q<?=  $index + 1 ?> OF <?=  $total ?></p>
                                         <p>Time Left: <span id="quiz-timer">--:--</span></p>
                                     </div>
                                     <div class="quiz-interface-header-logo">
@@ -243,7 +243,7 @@ header("Pragma: no-cache");
                                 <p><?= $question->question_text ?></p>
                             </div>
                             <form class="quiz-interface-forms" method="POST" action="/home-tutor/quiz/<?= $activity->activity_id ?>/s/q/<?= $index ?>">
-                                @csrf
+                                <input type="hidden" name="_token" value="<?= csrf_token() ?>">
                                 <div class="quiz-interface-answers">
                                     <?php foreach ($question->options as $option): ?>
                                         <div class="radio-button radio-<?= $class ?>">

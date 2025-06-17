@@ -114,7 +114,7 @@
                                 </div>
                             </div>
                             <div class="module-section quiz-button-section">
-                                {{ '<a class="activity-link" href="/home-tutor/quiz/' . $activity->activity_id . '/s"> ' }}
+                                <?='<a class="activity-link" href="/home-tutor/quiz/' . $activity->activity_id . '/s"> ' ?>
                                 <div class="quiz-button activity-button <?= $buttonClass ?>">TAKE QUIZ</div>
                                 </a>
                             </div>
