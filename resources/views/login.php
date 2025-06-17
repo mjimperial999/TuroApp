@@ -185,7 +185,7 @@
               </div>
             <?php endif; ?>
           <form class="login-form-box" action="<?= $loginUrl ?>" method="POST">
-            <?= csrf_field() ?>
+            <!-- csrf_field() -->
             <p class="input-placeholder">EMAIL</p>
             <input type="text" id="email" name="email" required />
 

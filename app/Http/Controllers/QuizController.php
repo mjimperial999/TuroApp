@@ -50,10 +50,7 @@ class QuizController extends Controller
         }
 
         if (!Session::get("quiz_{$activityID}_in_progress")) {
-            Session::forget("quiz_{$activityID}_questions");
-            Session::forget("quiz_{$activityID}_answers");
-            Session::forget("quiz_{$activityID}_deadline");
-            return redirect("/home-tutor/quiz/{$activityID}")
+            return redirect("/home-tutor/module/{$activity->module_id}")
                 ->with('error', 'Quiz has already ended or you accessed an invalid link.');
         }
 
@@ -153,7 +150,8 @@ class QuizController extends Controller
             Session::forget("quiz_{$activityID}_deadline");
             Session::forget("quiz_{$activityID}_in_progress");
 
-            return redirect("/home-tutor/quiz/{$activityID}");
+            return redirect("/home-tutor/quiz/{$activityID}")
+                ->with('error', 'Finished quiz.');
         }
     }
 }
