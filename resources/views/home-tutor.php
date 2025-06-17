@@ -35,8 +35,7 @@
         .course-menu {
             margin: 0;
             border-radius: 0.4rem;
-            width: 20rem;
-            height: 14rem;
+            width: 100%;
             font-size: 30px;
             text-align: center;
             box-shadow: 0rem 0rem 12rem -3rem rgba(0, 0, 0, 0.8) inset, 2rem -6rem 20rem -2rem rgba(0, 0, 0, 1) inset;
@@ -102,6 +101,8 @@
 
         a.module-link {
             text-decoration: none;
+            width: 20rem;
+            height: 14rem;
         }
     </style>
 </head>
@@ -130,9 +131,7 @@
                             <h6 class="course-desc">' . $formattedDate . '</h6>
                         </div>
                     </div>
-                </div></a>
-
-                        ';
+                </div></a>';
                 }
                 ?>
             </div>

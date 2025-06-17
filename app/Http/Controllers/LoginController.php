@@ -26,7 +26,8 @@ class LoginController extends Controller
             Session::put('user_id', $user->user_id);
             Session::put('user_name', $user->first_name . ' ' . $user->last_name);
             Session::put('role_id', $user->role_id);
-            return redirect('/home-tutor');
+
+            return redirect()->intended('/home-tutor');
         }
 
         return redirect('/login')->with('error', 'Invalid credentials');

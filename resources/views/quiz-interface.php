@@ -262,7 +262,7 @@ header("Pragma: no-cache");
             </table>
 
         </div>
-        @include('partials/right-side-notifications.php')
+        <?php include('partials/right-side-notifications.php'); ?>
     </div>
 </body>
 <script>
