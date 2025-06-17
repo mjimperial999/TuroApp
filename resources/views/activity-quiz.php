@@ -158,5 +158,8 @@
         <?php include('partials/right-side-notifications.php'); ?>
     </div>
 </body>
+<script>
+    console.log('Hello');
+</script>
 
 </html>

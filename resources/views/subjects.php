@@ -243,6 +243,8 @@
   </div>
 
   <script>
+    console.log('Hello');
+    
     function selectSubject(subject) {
       localStorage.setItem("selectedSubject", subject);
       window.location.href = `dashboard-math.html?subject=${subject}`;

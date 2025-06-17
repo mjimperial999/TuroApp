@@ -259,6 +259,8 @@ header("Pragma: no-cache");
     </div>
 </body>
 <script>
+    console.log('Hello');
+    
     let secondsLeft = <?= $remainingSeconds ?>;
     const timerElement = document.getElementById('quiz-timer');
     const form = document.querySelector('form');
