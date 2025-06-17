@@ -165,7 +165,11 @@
     }
   </style>
 </head>
-
+<?php
+    $loginUrl = app()->environment('production') 
+        ? secure_url('/login') 
+        : url('/login');
+?>
 <body>
   <div class="login-page-screen">
     <div class="login-side-container">
@@ -180,7 +184,7 @@
                 <?= session('error') ?>
               </div>
             <?php endif; ?>
-          <form class="login-form-box" action="<?= secure_url('/login') ?>" method="POST">
+          <form class="login-form-box" action="<?= $loginUrl ?>" method="POST">
             <input type="hidden" name="_token" value="<?= csrf_token() ?>">
             <p class="input-placeholder">EMAIL</p>
             <input type="text" id="email" name="email" required />
