@@ -180,7 +180,7 @@
                 <?= session('error') ?>
               </div>
             <?php endif; ?>
-          <form class="login-form-box" action="<?= url('/login') ?>" method="POST">
+          <form class="login-form-box" action="<?= secure_url('/login') ?>" method="POST">
             <input type="hidden" name="_token" value="<?= csrf_token() ?>">
             <p class="input-placeholder">EMAIL</p>
             <input type="text" id="email" name="email" required />
