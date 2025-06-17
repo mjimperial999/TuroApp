@@ -185,7 +185,8 @@
               </div>
             <?php endif; ?>
           <form class="login-form-box" action="<?= $loginUrl ?>" method="POST">
-            <input type="hidden" name="_token" value="<?= csrf_token() ?>">
+            @csrf
+            <!-- <input type="hidden" name="_token" value=" csrf_field() "> -->
             <p class="input-placeholder">EMAIL</p>
             <input type="text" id="email" name="email" required />
 
