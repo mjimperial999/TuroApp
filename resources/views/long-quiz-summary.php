@@ -120,9 +120,9 @@
                                     <p>Long Quiz</p>
                                 </div>
                             </div>
-                            <div class="back-button-container">
+                            <div class="return-prev-container">
                                 <?= '<a class="activity-link" href="/home-tutor/long-quiz/' . $course->course_id . '/' . $longquiz->long_quiz_id . '/"> ' ?>
-                                <div class="back-button"><- BACK to <?= $longquiz->long_quiz_name ?> page</div>
+                                <div class="return-prev"><- BACK to <?= $longquiz->long_quiz_name ?> page</div>
                                 </a>
                             </div>
                         </div>

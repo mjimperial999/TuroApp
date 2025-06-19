@@ -55,9 +55,9 @@
                                     <p><?= $activity->activity_description ?></p>
                                 </div>
                             </div>
-                            <div class="back-button-container">
+                            <div class="return-prev-container">
                                 <?= '<a class="activity-link" href="/home-tutor/module/' . $activity->module_id . '/"> ' ?>
-                                <div class="back-button"><- BACK to Module Page</div>
+                                <div class="return-prev"><- BACK to Module Page</div>
                                         </a>
                                 </div>
                             </div>

@@ -63,9 +63,9 @@
                     <th class="table-right-padding">
                         <div class="first-th">
                             <h5><b><?php echo $module->module_name ?></b></h5>
-                            <div class="back-button-container">
+                            <div class="return-prev-container">
                                 <?= '<a class="activity-link" href="/home-tutor/course/'. $module->course_id .'/"> ' ?>
-                                <div class="back-button"><- BACK to Course: <?= $module->course_name ?> Page</div>
+                                <div class="return-prev"><- BACK to Course: <?= $module->course_name ?> Page</div>
                                         </a>
                                 </div>
                             </div>

@@ -118,9 +118,9 @@
                                     <p><?= $quiz_type ?></p>
                                 </div>
                             </div>
-                            <div class="back-button-container">
+                            <div class="return-prev-container">
                                 <?= '<a class="activity-link" href="/home-tutor/quiz/' . $activity->activity_id . '/"> ' ?>
-                                <div class="back-button"><- BACK to <?= $activity->activity_name ?> page</div>
+                                <div class="return-prev"><- BACK to <?= $activity->activity_name ?> page</div>
                                 </a>
                             </div>
                         </div>

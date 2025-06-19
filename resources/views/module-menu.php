@@ -172,9 +172,9 @@
         <div class="home-tutor-main">
             <div class="home-tutor-courses-header">
                 <h5>Modules</h5>
-                <div class="back-button-container">
+                <div class="return-prev-container">
                     <?= '<a class="activity-link" href="/home-tutor"> ' ?>
-                    <div class="back-button"><- BACK to Courses</div>
+                    <div class="return-prev"><- BACK to Courses</div>
                     </a>
                 </div>
             </div>
