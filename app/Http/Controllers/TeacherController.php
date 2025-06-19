@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Users;
 
 class TeacherController extends Controller
 {
@@ -24,5 +25,8 @@ class TeacherController extends Controller
         if ($redirect = $this->checkTeacherAccess()) return $redirect;
 
         $userID = session('user_id');
+        $userID = session()->get('user_id');
+        $users = Users::with('image')->findOrFail($userID);
+        return view('student-profile', compact('users'));
     }
 }
