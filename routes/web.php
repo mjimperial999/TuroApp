@@ -9,6 +9,9 @@ use App\Http\Controllers\AdminController;
 
 // GENERAL
 Route::get('/', [MainController::class, 'landingRedirect']);
+Route::get('/test', function () {
+    return view('navbar-test');
+});
 
 Route::get('/health', function () {
     return response()->json(['status' => 'OK']);
