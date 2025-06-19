@@ -99,7 +99,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="main-header">
         <a href="/home-tutor"><img src="/icons/title-logo.svg" width="120em" height="auto"></a>
         <div class="navbar-user">
             <span style="color: white; font-family: Alexandria, sans-serif;">
@@ -136,10 +136,15 @@
     <div class="home-tutor-screen">
         <div class="home-tutor-main">
             <h4>Dashboard - Courses</h4>
+            <div class="return-prev-cont">
+                <?= '<a class="activity-link" href="#"> ' ?>
+                <div class="return-prev">BACK Page</div>
+                        </a>
+                </div>
+            </div>
             <hr>
         </div>
         <?php include('partials/right-side-notifications.php'); ?>
     </div>
 </body>
-
 </html>

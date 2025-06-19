@@ -217,7 +217,7 @@ header("Pragma: no-cache");
                 <tr>
                     <td class="table-left-padding"></td>
                     <td class="table-right-padding" style="padding: 3rem 2rem;">
-                        <div class="module-section quiz-interface quiz-background-container <?= $class ?>">
+                        <div class="module-section quiz-interface quiz-background <?= $class ?>">
                             <div class="quiz-interface-header">
                                 <div class="quiz-interface-header-question-number">
                                     <p>QUESTION <?= $index + 1 ?></p>

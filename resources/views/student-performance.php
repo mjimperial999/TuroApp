@@ -244,7 +244,7 @@
                 <tr class="module-subtitle">
                     <td class="table-left-padding"></td>
                     <td class="table-right-padding">
-                        <div class="module-section quiz-background-container profile-color">
+                        <div class="module-section quiz-background profile-color">
                             <div class="performance-container">
                                 <div class="performance-details">
                                     <b>ALL COURSES</b>

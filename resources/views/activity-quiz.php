@@ -61,10 +61,10 @@
                                     <p><?= $quiz_type ?></p>
                                 </div>
                             </div>
-                            <div class="return-prev-container">
-                                <?= '<a class="activity-link" href="/home-tutor/module/' . $activity->module_id . '/"> ' ?>
-                                <div class="return-prev"><- BACK to Module Page</div>
-                                        </a>
+                            <div class="return-prev-cont">
+                                <?= '<a class="activity-link" href="/home-tutor/module/' . $activity->module_id . '/">
+                                <div class="return-prev">BACK to Module Page</div>
+                                        </a> ' ?>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                                 <?= session('success') ?>
                             </div>
                         <?php endif; ?>
-                        <div class="module-section quiz-background-container <?= $class ?>">
+                        <div class="module-section quiz-background <?= $class ?>">
                             <div class="module-section quiz-header">
                                 <div class="quiz-description">
                                     <div class="quiz-categories-top">
@@ -154,5 +154,4 @@
         <?php include('partials/right-side-notifications.php'); ?>
     </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </html>

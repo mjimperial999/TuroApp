@@ -171,11 +171,11 @@
     <div class="home-tutor-screen">
         <div class="home-tutor-main">
             <div class="home-tutor-courses-header">
-                <h5>Modulesss</h5>
-                <div class="return-prev-container">
-                    <?= '<a class="activity-link" href="/home-tutor"> ' ?>
-                    <div class="return-prev"><- BACK to Courses</div>
-                            </a>
+                <h5>Modules</h5>
+                <div class="return-prev-cont">
+                    <?= '<a class="activity-link" href="/home-tutor">
+                    <div class="return-prev">Back to Courses</div>
+                            </a>' ?>
                     </div>
                 </div>
                 <hr>
@@ -226,5 +226,4 @@
             <?php include('partials/right-side-notifications.php'); ?>
         </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </html>

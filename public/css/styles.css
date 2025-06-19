@@ -51,7 +51,7 @@ a.nav {
     margin: 0 auto;
 }
 
-header {
+.main-header {
     background-color: #c9000A;
     display: flex;
     justify-content: space-between;
@@ -66,7 +66,7 @@ header {
     gap: 0 2rem;
 }
 
-.navbar-user {
+.navibar-user {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -76,14 +76,14 @@ header {
     gap: 0 1rem;
 }
 
-.navbar-img-container {
+.navibar-img {
     background-size: cover;
     border: 0.2em solid #f0b942;
     border-radius: 23em;
     transition: all 0.3s ease 0s;
 }
 
-.navbar-img-container:hover {
+.navibar-img-container:hover {
     transform: scale(1.05);
     transition: all 0.3s ease 0s;  
 }
@@ -419,7 +419,7 @@ p.description,
     padding: 0.4rem 1rem;
 }
 
-.quiz-background-container {
+.quiz-background {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -472,7 +472,7 @@ p.description,
     justify-content: center;
 }
 
-.quiz-background-container .percentage-container {
+.quiz-background .percentage-container {
     position: relative;
     width: 100%;
     height: auto;
@@ -482,18 +482,18 @@ p.description,
     align-items: center;
 }
 
-.quiz-background-container .percentage-container .percent {
+.quiz-background .percentage-container .percent {
     position: relative;
     width: 10rem;
     height: 10rem;
 }
 
-.quiz-background-container .percentage-container .percent svg {
+.quiz-background .percentage-container .percent svg {
     width: 100%;
     height: 100%;
 }
 
-.quiz-background-container .percentage-container .percent svg circle {
+.quiz-background .percentage-container .percent svg circle {
     width: 10rem;
     height: auto;
     fill: transparent;
@@ -503,7 +503,7 @@ p.description,
     transform: translate(0.70rem, 0.70rem);
 }
 
-.quiz-background-container .percentage-container .percent svg circle:nth-child(2) {
+.quiz-background .percentage-container .percent svg circle:nth-child(2) {
     width: 10rem;
     height: auto;
     fill: transparent;
@@ -562,7 +562,7 @@ p.description,
     justify-content: space-between;
 }
 
-.return-prev-container {
+.return-prev-cont {
     display: flex;
     justify-content: flex-start;
     align-items: center;
