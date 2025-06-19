@@ -36,6 +36,8 @@ function getMimeTypeFromBlob($blob)
                 <!-- Trigger element: background-image div -->
                 <div
                     class="svg navbar-img-container dropdown-toggle"
+                    role="button"
+                    tabindex="0"
                     style="background-image: url('<?= $imageURL ?>'); width: 2.5em; height: 2.5em; background-size: cover; background-position: center; border-radius: 50%; cursor: pointer;"
                     data-bs-toggle="dropdown"
                     aria-expanded="false">
@@ -45,6 +47,23 @@ function getMimeTypeFromBlob($blob)
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="/profile">Profile</a></li>
                     <hr style="width: 100%; margin-top: 0.5em; margin-bottom: 0.5em;">
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <button
+                    class="btn dropdown-toggle p-0 border-0 bg-transparent svg"
+                    type="button"
+                    id="profileDropdown"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style="background-image: url('<?= $imageURL ?>'); width: 2.5em; height: 2.5em; background-size: cover; background-position: center; border-radius: 50%;">
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                    <hr class="dropdown-divider">
                     <li><a class="dropdown-item" href="/logout">Logout</a></li>
                 </ul>
             </div>

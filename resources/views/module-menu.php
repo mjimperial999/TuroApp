@@ -171,31 +171,31 @@
     <div class="home-tutor-screen">
         <div class="home-tutor-main">
             <div class="home-tutor-courses-header">
-                <h5>Modules</h5>
+                <h5>Modulesss</h5>
                 <div class="return-prev-container">
                     <?= '<a class="activity-link" href="/home-tutor"> ' ?>
                     <div class="return-prev"><- BACK to Courses</div>
-                    </a>
+                            </a>
+                    </div>
                 </div>
-            </div>
-            <hr>
-            <div class="module-display-flex-box">
-                <?php if ($course->modules->isEmpty()): ?>
-                    <p>No modules available for this course.</p>
-                <?php else: foreach ($course->modules as $module) {
-                        if (!$module->moduleimage?->image) {
-                            $backgroundImage = "/uploads/course/math.jpg";
-                        }
-                        $blobData = $module->moduleimage?->image;
-                        if (!$blobData) {
-                            $backgroundImage = "/uploads/course/math.jpg";
-                        } else {
-                            $mimeType = getMimeTypeFromBlob($blobData);
-                            $base64Image = base64_encode($blobData);
-                            $backgroundImage = "data:$mimeType;base64,$base64Image";
-                        }
+                <hr>
+                <div class="module-display-flex-box">
+                    <?php if ($course->modules->isEmpty()): ?>
+                        <p>No modules available for this course.</p>
+                    <?php else: foreach ($course->modules as $module) {
+                            if (!$module->moduleimage?->image) {
+                                $backgroundImage = "/uploads/course/math.jpg";
+                            }
+                            $blobData = $module->moduleimage?->image;
+                            if (!$blobData) {
+                                $backgroundImage = "/uploads/course/math.jpg";
+                            } else {
+                                $mimeType = getMimeTypeFromBlob($blobData);
+                                $base64Image = base64_encode($blobData);
+                                $backgroundImage = "data:$mimeType;base64,$base64Image";
+                            }
 
-                        echo '<a class="module-link" href="/home-tutor/module/' . $module->module_id . '"><div class="module-menu" style="background-image: url(' . $backgroundImage . ');">
+                            echo '<a class="module-link" href="/home-tutor/module/' . $module->module_id . '"><div class="module-menu" style="background-image: url(' . $backgroundImage . ');">
                     <div class="module-filler">
                     </div>
                     <div class="module-details">
@@ -205,25 +205,26 @@
                 </div></a>
 
                         ';
-                    };
-                endif; ?>
+                        };
+                    endif; ?>
+
+                </div>
+                <div class="long-quiz-display-box">
+                    <h5>Long Quizzes</h5>
+                    <?php foreach ($course->longquizzes as $longquiz) {
+                        include('partials/time-lock-check-modules.php');
+                        include('partials/quiz-long-hero.php');
+                    }; ?>
+                </div>
+                <h5>Screening Tests</h5>
+                <hr>
+                <div class="featured-module">
+
+                </div>
 
             </div>
-            <div class="long-quiz-display-box">
-                <h5>Long Quizzes</h5>
-                <?php foreach ($course->longquizzes as $longquiz) {
-                    include('partials/time-lock-check-modules.php');
-                    include('partials/quiz-long-hero.php');
-                }; ?>
-            </div>
-            <h5>Screening Tests</h5>
-            <hr>
-            <div class="featured-module">
-
-            </div>
-
+            <?php include('partials/right-side-notifications.php'); ?>
         </div>
-        <?php include('partials/right-side-notifications.php'); ?>
-    </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </html>
