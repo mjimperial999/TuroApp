@@ -27,6 +27,63 @@
             padding: 1em 1.5em;
         }
 
+        .quiz-header {
+            padding: 1rem 0;
+            align-items: center;
+        }
+
+        .quiz-summary-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quiz-points-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quiz-summary-score-details {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .quiz-summary-logo-container {
+            padding-right: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quiz-summary-logo-container img {
+            transform: rotate(6deg);
+            filter: drop-shadow(0 0rem 0.1rem rgba(0, 0, 0, 0.2));
+        }
+
+        .quiz-summary-score {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .quiz-summary-score .description {
+            line-height: 1.2;
+            font-size: 1.4rem;
+        }
+
+        .description.summary-score {
+            font-size: 2.7rem;
+        }
+
+        .description.italic {
+            font-family: Albert-Sans-IT, sans-serif;
+        }
+
+        .quiz-summary-attempts {
+            width: 100%;
+        }
+
+
         @keyframes anim {
             100% {
                 stroke-dashoffset: var(--num);
@@ -62,10 +119,9 @@
                                 </div>
                             </div>
                             <div class="back-button-container">
-                                <?= '<a class="activity-link" href="/home-tutor/module/' . $activity->module_id . '/"> ' ?>
-                                <div class="back-button"><- BACK to Module Page</div>
-                                        </a>
-                                </div>
+                                <?= '<a class="activity-link" href="/home-tutor/quiz/' . $activity->activity_id . '/"> ' ?>
+                                <div class="back-button"><- BACK to <?= $activity->activity_name ?> page</div>
+                                </a>
                             </div>
                         </div>
                     </th>
@@ -84,25 +140,26 @@
                         <?php endif; ?>
                         <div class="module-section quiz-background-container <?= $class ?>">
                             <div class="module-section quiz-header">
-                                <div class="quiz-description">
-                                    <div class="quiz-categories-top">
-                                        <div class="quiz-categories">
-                                            <div class="quiz-categories-desc">
-                                                <p class="description"><b>QUESTIONS: </b><?= $activity->quiz->number_of_questions ?></p>
-                                                <p class="description"><b>TOTAL ATTEMPTS: </b><?= $activity->quiz->number_of_attempts ?></p>
-                                                <p class="description"><b>TIME LIMIT: </b><?= $fTimeLimit ?> min/s</p>
-                                            </div>
+                                <div class="quiz-summary-container">
+                                    <div class="quiz-summary-score-details">
+                                        <div class="quiz-summary-logo-container">
+                                            <img class="svg" src="/icons/<?= $class ?>.svg" width="90em" height="auto" />
                                         </div>
-                                        <div class="quiz-categories">
-                                            <div class="quiz-categories-desc">
-                                                <p class="description"><b>OPENS: </b><?= $formattedUnlockDate ?></p>
-                                                <p class="description"><b>DUE: </b><?= $formattedDeadline ?></p>
-                                            </div>
+                                        <div class="quiz-summary-score">
+                                            <p class="description"><b>SCORE: </b></p>
+                                            <p class="description summary-score"><b><?= $assessment->earned_points . ' / ' . $activity->quiz->number_of_questions ?></b></p>
                                         </div>
-                                        <br>
                                     </div>
-                                    <hr>
-                                    <p class="description">Instructions: <?= $activity->activity_description ?></p>
+                                </div>
+                                <div class="quiz-points-container">
+                                    <div class="quiz-points-details">
+                                        <p class="description">POINTS GARNERED: <b><?= ($assessment->earned_points * 10) ?></b></p>
+                                        <p class="description italic">You got <?= ($assessment->earned_points * 10) ?> points for getting <?= $assessment->earned_points ?> correct answers.</p>
+                                        <hr>
+                                        <p class="description"><b>SCORE CONDITIONS: </b></p>
+                                        <p class="description"><b>SCORE X 10 = POINTS </b></p>
+                                        <p class="description"><b><?= ($assessment->earned_points) ?></b> X 10 = <b><?= ($assessment->earned_points * 10) ?></b></p>
+                                    </div>
                                 </div>
                                 <div class="quiz-graphics">
                                     <div class="percentage-container">
@@ -118,33 +175,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="module-section quiz-button-section">
-                                <?= '<a class="activity-link" href="/home-tutor/quiz/' . $activity->activity_id . '/s"> ' ?>
-                                <div class="quiz-button activity-button <?= $buttonClass ?>">TAKE QUIZ</div>
-                                </a>
+                            <hr style="width: 100%;">
+                            <div class="module-section quiz-summary-attempts">
+                                <p class="description"><b>ATTEMPT HISTORY</b></p>
+                                <table class="attempts-table">
+                                    <?php foreach ($assessDisplay as $index => $a): ?>
+                                        <tr>
+                                            <td><b><?= 'Attempt ' . ($index + 1) ?></b></td>
+                                            <td><?= $a->earned_points . ' / ' . $activity->quiz->number_of_questions ?></td>
+                                            <td><?= $a->score_percentage ?>%</td>
+                                            <td><?= date('F j, Y h:i A', strtotime($a->date_taken)) ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </table>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-left-padding"></td>
-                    <td class="table-right-padding">
-                        <div class="module-section">
-                            <p class="description" style="color: #492C2C;"><b>ANALYSIS</b></p>
-                            <p class="description" style="color: #492C2C;"><b>ATTEMPTS TAKEN: </b><?= $attempts ?></p>
-                            <table class="attempts-table">
-                                <thead>
-                                    <tr class="attempts-table-header" style="background-color: rgba(176, 176, 176, 0.4);">
-                                        <th>ATTEMPT</th>
-                                        <th>SCORE</th>
-                                        <th>PERCENTAGE</th>
-                                        <th>DATE TAKEN</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php include('partials/module-quiz-assessments.php'); ?>
-                                </tbody>
-                            </table>
+                            <hr style="width: 100%;">
                         </div>
                     </td>
                 </tr>

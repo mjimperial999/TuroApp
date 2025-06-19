@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $activity->activity_name ?> | Turo</title>
+    <title><?= $longquiz->long_quiz_name ?> | Turo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
     <style>
@@ -39,10 +39,14 @@
 <body>
     <?php
     include('partials/navibar.php');
-    include('partials/quiz-type-check.php');
-    include('partials/time-lock-check.php');
-    include('partials/time-limit-conversion.php');
+    include('partials/time-lock-check-modules.php');
     include('partials/score-calc.php');
+
+    $seconds = $longquiz->time_limit;
+    $minutes = floor($seconds / 60);
+    $fTimeLimit = sprintf("%2d", $minutes);
+
+    $circle_display = (450 - (450 * 100) / 100);
     ?>
 
     <div class="home-tutor-screen">
@@ -54,18 +58,17 @@
                         <div class="first-th">
                             <div class="module-heading">
                                 <div class="module-logo">
-                                    <img class="svg" src="/icons/<?= $class ?>.svg" width="50em" height="auto" />
+                                    <img class="svg" src="/icons/long-quiz.svg" width="50em" height="auto" />
                                 </div>
                                 <div class="heading-context">
-                                    <h5><b><?= $activity->activity_name ?></b></h5>
-                                    <p><?= $quiz_type ?></p>
+                                    <h5><b><?= $longquiz->long_quiz_name ?></b></h5>
+                                    <p>Long Quiz</p>
                                 </div>
                             </div>
                             <div class="back-button-container">
-                                <?= '<a class="activity-link" href="/home-tutor/module/' . $activity->module_id . '/"> ' ?>
-                                <div class="back-button"><- BACK to Module Page</div>
-                                        </a>
-                                </div>
+                                <?= '<a class="activity-link" href="/home-tutor/course/' . $course->course_id . '/"> ' ?>
+                                <div class="back-button"><- BACK to Course: <?= $course->course_name ?> Page</div>
+                                </a>
                             </div>
                         </div>
                     </th>
@@ -82,14 +85,14 @@
                                 <?= session('success') ?>
                             </div>
                         <?php endif; ?>
-                        <div class="module-section quiz-background-container <?= $class ?>">
+                        <div class="module-section quiz-background-container long-quiz">
                             <div class="module-section quiz-header">
                                 <div class="quiz-description">
                                     <div class="quiz-categories-top">
                                         <div class="quiz-categories">
                                             <div class="quiz-categories-desc">
-                                                <p class="description"><b>QUESTIONS: </b><?= $activity->quiz->number_of_questions ?></p>
-                                                <p class="description"><b>TOTAL ATTEMPTS: </b><?= $activity->quiz->number_of_attempts ?></p>
+                                                <p class="description"><b>QUESTIONS: </b><?= $longquiz->number_of_questions ?></p>
+                                                <p class="description"><b>TOTAL ATTEMPTS: </b><?= $longquiz->number_of_attempts ?></p>
                                                 <p class="description"><b>TIME LIMIT: </b><?= $fTimeLimit ?> min/s</p>
                                             </div>
                                         </div>
@@ -102,25 +105,25 @@
                                         <br>
                                     </div>
                                     <hr>
-                                    <p class="description">Instructions: <?= $activity->activity_description ?></p>
+                                    <p class="description">Instructions: <?= $longquiz->long_quiz_instructions ?></p>
                                 </div>
                                 <div class="quiz-graphics">
                                     <div class="percentage-container">
-                                        <div class="percent" style="--clr:<?= $color ?>; --num:<?= $circle_display ?>">
+                                        <div class="percent" style="--clr:<?= '#01EE2C' ?>; --num:<?= $circle_display ?>">
                                             <svg>
                                                 <circle cx="70" cy="70" r="70"></circle>
                                                 <circle cx="70" cy="70" r="70"></circle>
                                             </svg>
                                         </div>
                                         <div class="percent-number">
-                                            <h1><?= $percentage_display ?><span>%</span></h1>
+                                            <h1><?= '100' ?><span>%</span></h1>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="module-section quiz-button-section">
-                                <?= '<a class="activity-link" href="/home-tutor/quiz/' . $activity->activity_id . '/s"> ' ?>
-                                <div class="quiz-button activity-button <?= $buttonClass ?>">TAKE QUIZ</div>
+                                <?='<a class="activity-link" href="/home-tutor/long-quiz/' . $course->course_id . '/' . $longquiz->long_quiz_id . '/s"> ' ?>
+                                <div class="quiz-button activity-button quiz-long-activity">TAKE QUIZ</div>
                                 </a>
                             </div>
                         </div>
@@ -142,7 +145,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php include('partials/module-quiz-assessments.php'); ?>
+                                    <?php include('partials/long-quiz-assessments.php'); ?>
                                 </tbody>
                             </table>
                         </div>

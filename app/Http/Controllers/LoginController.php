@@ -16,18 +16,26 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+
         $user = Users::where('email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->password_hash)) {
-            if ($user->role_id != 1) {
-                return redirect('/login')->with('error', 'Only students can login.');
+            if ($user->role_id == 1) {
+                Session::put('user_id', $user->user_id);
+                Session::put('user_name', $user->first_name . ' ' . $user->last_name);
+                Session::put('role_id', $user->role_id);
+                Session::save();
+
+                return redirect()->intended('/home-tutor');
             }
+            elseif ($user->role_id == 2){
+                Session::put('user_id', $user->user_id);
+                Session::put('user_name', $user->first_name . ' ' . $user->last_name);
+                Session::put('role_id', $user->role_id);
+                Session::save();
 
-            Session::put('user_id', $user->user_id);
-            Session::put('user_name', $user->first_name . ' ' . $user->last_name);
-            Session::put('role_id', $user->role_id);
-
-            return redirect()->intended('/home-tutor');
+                return redirect()->intended('/teachers-panel');
+            }             
         }
 
         return redirect('/login')->with('error', 'Invalid credentials');
@@ -36,6 +44,6 @@ class LoginController extends Controller
     public function logout()
     {
         Session::flush();
-        return redirect('/login')->with('error', 'You are logged out.');
+        return redirect('/login')->with('success', 'Successfully Logged Out');
     }
 }

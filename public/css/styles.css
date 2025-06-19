@@ -62,6 +62,34 @@ header {
     position: -webkit-sticky;
     z-index: 10;
     top: 0;
+
+    gap: 0 2rem;
+}
+
+.navbar-user {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 0 1rem;
+}
+
+.navbar-img-container {
+    background-size: cover;
+    border: 0.2em solid #f0b942;
+    border-radius: 23em;
+    transition: all 0.3s ease 0s;
+}
+
+.navbar-img-container:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease 0s;  
+}
+
+.dropdown-toggle::after {
+    display: none !important;
 }
 
 nav {
@@ -175,6 +203,12 @@ th>h5,
 td>h5,
 .heading-context,
 .activity-description {
+    font-family: Alata, sans-serif;
+    color: #492C2C;
+    margin: 0;
+}
+
+th h5 {
     font-family: Alata, sans-serif;
     color: #492C2C;
     margin: 0;
@@ -358,6 +392,16 @@ p.description,
     color: #273341;
 }
 
+.profile-color {
+    background:
+        linear-gradient(135deg,rgb(230, 182, 182) 0%, rgb(234, 212, 185) 50%, rgb(231, 217, 177) 100%) padding-box,
+        linear-gradient(135deg,rgb(219, 84, 84) 0%, rgb(223, 165, 94) 50%, rgb(219, 190, 112) 100%) border-box;
+    border: 0.08rem solid transparent;
+    border-radius: 0.5rem;
+
+    padding: 1rem;
+}
+
 .attempts-table {
     border-radius: 0.5rem;
     width: 100%;
@@ -506,6 +550,49 @@ p.description,
     padding: 0;
 
     font-family: Alexandria, sans-serif;
+}
+
+.first-th {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.back-button-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.back-button {
+    margin: 0;
+    padding: 0.5rem;
+    font-weight: 500;
+
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgb(95, 95, 95) 0%, rgb(73, 73, 73) 100%);
+    font-family: Alexandria, sans-serif;
+    border-radius: 0.4rem;
+
+
+    filter: drop-shadow(0 0.1rem 0.1rem rgba(0, 0, 0, 0.2));
+    color: #FFFFFF;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    transition: all 0.3s ease 0s;
+}
+
+.back-button:hover {
+    cursor: pointer;
+    transform: translate(0, -0.1rem);
+    transition: all 0.3s ease 0s;
 }
 
 .alert-message {

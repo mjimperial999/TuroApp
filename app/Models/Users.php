@@ -21,6 +21,16 @@ class Users extends Model
         'role_id',
         'profile_pic',
         'agreed_to_terms',
-        'requires_password_change'
+        'requires_password_change',
     ];
+
+    public function student()
+    {
+        return $this->hasMany(Students::class, 'user_id');
+    }
+
+    public function image()
+    {
+        return $this->hasOne(UserImages::class, 'user_id');
+    }
 }

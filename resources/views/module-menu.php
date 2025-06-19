@@ -11,11 +11,25 @@
         h4 {
             font-family: Alata, sans-serif;
         }
-        
-        .featured-module {
-            width: 26rem;
-            height: 15rem;
+
+        .home-tutor-courses-header {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .home-tutor-courses-header h5 {
+            margin: 0;
             padding: 0;
+        }
+
+        .featured-module {
+            width: 20rem;
+            height: 8rem;
+            padding: 0;
+            margin-bottom: 2rem;
             cursor: pointer;
             border-radius: 0.4rem;
             background-image: url('/uploads/course/math.jpg');
@@ -34,11 +48,11 @@
 
         .module-display-flex-box {
             width: 100%;
-            margin-top: 1rem;
-            padding: 1rem 0;
+            padding: 0.5rem 0;
+            margin-bottom: 1rem;
             height: auto;
 
-            white-space: nowrap; 
+            white-space: nowrap;
             display: flex;
             flex-direction: row;
 
@@ -52,7 +66,7 @@
             margin: 0;
             border-radius: 0.4rem;
             width: 16rem;
-            height: 9rem;
+            height: 8rem;
             font-size: 30px;
             text-align: center;
             box-shadow: 0rem 0rem 6rem -3rem rgba(0, 0, 0, 0.8) inset, 2rem -6rem 12rem -2rem rgba(0, 0, 0, 1) inset;
@@ -81,39 +95,65 @@
         }
 
         .module-details {
-            height: 6rem;
+            width: 100%;
+            height: 100%;
             padding: 1rem 1rem;
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-        }
-
-        .module-header {
-            display: flex;
             flex-direction: column;
-            align-items: flex-start;
             justify-content: flex-end;
         }
 
-        .module-teacher {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            justify-content: flex-end;
-        }
-
-        .module-title,
-        .module-desc {
+        .module-menu-title,
+        .module-menu-progress {
             color: #FFFFFF;
             margin: 0;
             padding: 0;
             font-family: Alexandria, sans-serif;
             font-weight: 500;
+            text-align: left;
         }
 
-        .module-desc {
+        .module-menu-title {
+            width: 100%;
+            height: auto;
+
+            font-size: 1rem;
+            font-weight: 500;
+            text-wrap: wrap;
+            line-height: 1;
+            box-orient: vertical;
+            line-clamp: 2;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+
+
+        .module-menu-progress {
             font-size: 0.8rem;
             font-weight: 300;
+
+            height: auto;
+            text-wrap: wrap;
+
+            line-height: 1;
+            box-orient: vertical;
+            line-clamp: 2;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+
+        .long-quiz-display-box {
+            padding-bottom: 2rem;
         }
 
         h5 {
@@ -123,31 +163,44 @@
 </head>
 
 <body>
-    <?php include('partials/navibar.php'); ?>
+    <?php
+    include('partials/navibar.php');
+    include('partials/time-lock-check-modules.php');
+    ?>
 
     <div class="home-tutor-screen">
         <div class="home-tutor-main">
-            <h5>Continue Where You've Left Off</h5>
-            <hr>
-            <div class="featured-module">
-
+            <div class="home-tutor-courses-header">
+                <h5>Modules</h5>
+                <div class="back-button-container">
+                    <?= '<a class="activity-link" href="/home-tutor"> ' ?>
+                    <div class="back-button"><- BACK to Courses</div>
+                    </a>
+                </div>
             </div>
-
+            <hr>
             <div class="module-display-flex-box">
                 <?php if ($course->modules->isEmpty()): ?>
                     <p>No modules available for this course.</p>
                 <?php else: foreach ($course->modules as $module) {
-                        echo '<a class="module-link" href="/home-tutor/module/' . $module->module_id . '"><div class="module-menu" style="background-image: url(' . "'/uploads/module/module1.jpeg'" . ');">
+                        if (!$module->moduleimage?->image) {
+                            $backgroundImage = "/uploads/course/math.jpg";
+                        }
+                        $blobData = $module->moduleimage?->image;
+                        if (!$blobData) {
+                            $backgroundImage = "/uploads/course/math.jpg";
+                        } else {
+                            $mimeType = getMimeTypeFromBlob($blobData);
+                            $base64Image = base64_encode($blobData);
+                            $backgroundImage = "data:$mimeType;base64,$base64Image";
+                        }
+
+                        echo '<a class="module-link" href="/home-tutor/module/' . $module->module_id . '"><div class="module-menu" style="background-image: url(' . $backgroundImage . ');">
                     <div class="module-filler">
                     </div>
                     <div class="module-details">
-                        <div class="module-header">
-                            <h6 class="module-title">' . $module->module_name . '</h6>
-                            <h6 class="module-desc">' . $module->module_description . '</h6>
-                        </div>
-                        <div class="module-teacher">
-                            <h6 class="module-desc">'. $module->module_id . '</h6>
-                        </div>
+                        <div class="module-menu-title">' . $module->module_name . '</div>
+                        <div class="module-menu-progress">Progress: ' . $module->module_id . '</div>
                     </div>
                 </div></a>
 
@@ -156,10 +209,22 @@
                 endif; ?>
 
             </div>
+            <div class="long-quiz-display-box">
+                <h5>Long Quizzes</h5>
+                <?php foreach ($course->longquizzes as $longquiz) {
+                    include('partials/time-lock-check-modules.php');
+                    include('partials/quiz-long-hero.php');
+                }; ?>
+            </div>
+            <h5>Screening Tests</h5>
+            <hr>
+            <div class="featured-module">
+
+            </div>
 
         </div>
         <?php include('partials/right-side-notifications.php'); ?>
     </div>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </html>

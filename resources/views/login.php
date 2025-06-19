@@ -167,8 +167,8 @@
 </head>
 <?php
     $loginUrl = app()->environment('production') 
-        ? secure_url('/login') 
-        : url('/login');
+        ? secure_url('/auth') 
+        : url('/auth');
 ?>
 <body>
   <div class="login-page-screen">
@@ -182,6 +182,10 @@
             <?php if (session()->has('error')): ?>
               <div class="alert alert-danger alert-message" role="alert">
                 <?= session('error') ?>
+              </div>
+            <?php elseif (session()->has('success')): ?>
+                  <div class="alert alert-success alert-message" role="alert">
+                <?= session('success') ?>
               </div>
             <?php endif; ?>
           <form class="login-form-box" action="<?= $loginUrl ?>" method="POST">

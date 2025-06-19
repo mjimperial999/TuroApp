@@ -21,12 +21,19 @@ class Modules extends Model
     protected $fillable = [
         'course_id',
         'module_name',
-        'module_description'
+        'module_description',
+        'module_image',
     ];
 
     public function activities()
     {
         return $this->hasMany(Activities::class, 'module_id');
         // 'module_id' is the foreign key in the 'activity' table
+    }
+
+    public function moduleimage()
+    {
+        return $this->hasOne(ModuleImage::class, 'module_id', 'module_id');
+        // 'module_id' is the foreign key in the 'moduleimage' table
     }
 }

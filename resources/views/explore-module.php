@@ -44,15 +44,15 @@
         tr:nth-child(even) {
             background-color: rgba(232, 232, 232, 0.3);
         }
-
-        
     </style>
 </head>
 
 <body>
     <?php
+
     use Carbon\Carbon;
-        include('partials/navibar.php');
+
+    include('partials/navibar.php');
     ?>
 
     <div class="home-tutor-screen">
@@ -61,7 +61,15 @@
                 <tr class="module-title">
                     <th class="table-left-padding"></th>
                     <th class="table-right-padding">
-                        <h5><b><?php echo $module->module_name ?></b></h5>
+                        <div class="first-th">
+                            <h5><b><?php echo $module->module_name ?></b></h5>
+                            <div class="back-button-container">
+                                <?= '<a class="activity-link" href="/home-tutor/course/'. $module->course_id .'/"> ' ?>
+                                <div class="back-button"><- BACK to Course: <?= $module->course_name ?> Page</div>
+                                        </a>
+                                </div>
+                            </div>
+                        </div>
                     </th>
                 </tr>
                 <tr class="module-subtitle">
@@ -112,11 +120,13 @@
                             </div>
                             <div class="module-content">
                                 <?php foreach ($module->activities->where('activity_type', 'QUIZ') as $activity): {
-                                    if ($activity->quiz->quiz_type_id == 2):{
-                                        include('partials/time-lock-check.php');
-                                        include('partials/quiz-practice-hero.php');
-                                    } endif;
-                                }; endforeach; ?>
+                                        if ($activity->quiz->quiz_type_id == 2): {
+                                                include('partials/time-lock-check.php');
+                                                include('partials/quiz-practice-hero.php');
+                                            }
+                                        endif;
+                                    };
+                                endforeach; ?>
                             </div>
                         </div>
                     </td>
@@ -139,38 +149,13 @@
                             </div>
                             <div class="module-content">
                                 <?php foreach ($module->activities->where('activity_type', 'QUIZ') as $activity): {
-                                    if ($activity->quiz->quiz_type_id == 1):{
-                                        include('partials/time-lock-check.php');
-                                        include('partials/quiz-short-hero.php');
-                                    }; endif;
-                                }; endforeach; ?>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-left-padding"></td>
-                    <td class="table-right-padding">
-                        <div class="module-section">
-                            <div class="module-heading">
-                                <div class="module-logo">
-                                    <img class="svg" src="/icons/long-quiz.svg" width="50em" height="auto" />
-                                </div>
-                                <div class="heading-context">
-                                    <h5>LONG QUIZZES</h5>
-                                    <p>Test your skills.</p>
-                                </div>
-                            </div>
-                            <div class="module-divider">
-                                <hr>
-                            </div>
-                            <div class="module-content">
-                                <?php foreach ($module->activities->where('activity_type', 'QUIZ') as $activity): {
-                                    if ($activity->quiz->quiz_type_id == 3):{
-                                        include('partials/time-lock-check.php');
-                                        include('partials/quiz-long-hero.php');
-                                    }; endif;
-                                }; endforeach; ?>
+                                        if ($activity->quiz->quiz_type_id == 1): {
+                                                include('partials/time-lock-check.php');
+                                                include('partials/quiz-short-hero.php');
+                                            };
+                                        endif;
+                                    };
+                                endforeach; ?>
                             </div>
                         </div>
                     </td>
@@ -181,5 +166,5 @@
         <?php include('partials/right-side-notifications.php'); ?>
     </div>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </html>

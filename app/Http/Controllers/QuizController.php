@@ -7,11 +7,49 @@ use App\Models\Activities;
 use App\Models\AssessmentResult;
 use App\Models\Questions;
 use App\Models\Options;
+use App\Models\LongQuizAssessmentResult;
+use App\Models\StudentProgress;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 
+
 class QuizController extends Controller
 {
+    public function computeStudentAnalytics($studentId)
+    {
+        // Short quiz data (with module_id)
+        $short = AssessmentResult::where('student_id', $studentId)->where('is_kept', 1);
+
+        // Long quiz data (no module_id)
+        $long = LongQuizAssessmentResult::where('student_id', $studentId)->where('is_kept', 1)
+            ->select('score_percentage', 'earned_points');
+
+        // Averages
+        $shortAvg = $short->avg('score_percentage');
+        $longAvg = $long->avg('score_percentage');
+
+        $shortEarned = $short->sum('earned_points');
+        $longEarned = $long->sum('earned_points');
+
+        $shortCount = $short->count();
+        $longCount = $long->count();
+
+        $combinedTotal = $short->sum('score_percentage') + $long->sum('score_percentage');
+        $combinedCount = $shortCount + $longCount;
+        $combinedAvg = $combinedCount > 0 ? $combinedTotal / $combinedCount : 0;
+
+        $totalPoints = ($shortEarned + $longEarned) * 10;
+
+        StudentProgress::updateOrCreate(
+            ['student_id' => $studentId],
+            [
+                'average_score' => $combinedAvg,
+                'score_percentage' => $combinedAvg,
+                'total_points' => $totalPoints,
+            ]
+        );
+    }
+
     public function startQuiz($activityID)
     {
         $activity = Activities::with('quiz.questions.options')->findOrFail($activityID);
@@ -77,7 +115,7 @@ class QuizController extends Controller
         }
 
         $questionID = $questionIDs[$index];
-        $question = Questions::with('options')->findOrFail($questionID);
+        $question = Questions::with(['options', 'questionimage'])->findOrFail($questionID);
         $remainingSeconds = (int) max(0, Carbon::now('Asia/Manila')->diffInSeconds(Carbon::parse($deadline), false));
 
         return response()->view('quiz-interface', [
@@ -109,7 +147,6 @@ class QuizController extends Controller
         if (!$questionIDs || !$deadline) {
             return redirect("/home-tutor/quiz/{$activityID}")
                 ->with('error', 'Invalid quiz session.');
-                
         }
 
         if ($nextIndex < count($questionIDs)) {
@@ -150,8 +187,10 @@ class QuizController extends Controller
             Session::forget("quiz_{$activityID}_deadline");
             Session::forget("quiz_{$activityID}_in_progress");
 
-            return redirect("/home-tutor/quiz/{$activityID}")
-                ->with('error', 'Finished quiz.');
+            $this->computeStudentAnalytics($studentID);
+
+            return redirect("/home-tutor/quiz/{$activityID}/summary")
+                ->with('success', 'Finished quiz.');
         }
     }
 }

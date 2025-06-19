@@ -33,8 +33,6 @@
         .table-right-padding {
             padding: 1em 1.5em;
         }
-
-
     </style>
 </head>
 
@@ -47,13 +45,21 @@
                 <tr class="module-title">
                     <th class="table-left-padding"></th>
                     <th class="table-right-padding">
-                        <div class="module-heading">
-                            <div class="module-logo">
-                                <img class="svg" src="/icons/lecture.svg" width="50em" height="auto" style="filter: drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.2));" />
+                        <div class="first-th">
+                            <div class="module-heading">
+                                <div class="module-logo">
+                                    <img class="svg" src="/icons/lecture.svg" width="50em" height="auto" style="filter: drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.2));" />
+                                </div>
+                                <div class="heading-context">
+                                    <h5><b>LECTURE: <?= $activity->activity_name ?></b></h5>
+                                    <p><?= $activity->activity_description ?></p>
+                                </div>
                             </div>
-                            <div class="heading-context">
-                                <h5><b>LECTURE: <?= $activity->activity_name ?></b></h5>
-                                <p><?= $activity->activity_description ?></p>
+                            <div class="back-button-container">
+                                <?= '<a class="activity-link" href="/home-tutor/module/' . $activity->module_id . '/"> ' ?>
+                                <div class="back-button"><- BACK to Module Page</div>
+                                        </a>
+                                </div>
                             </div>
                         </div>
                     </th>
@@ -62,7 +68,7 @@
                     <td class="table-left-padding"></td>
                     <td class="table-right-padding">
                         <?= '<object
-                            data="/uploads/lecture/'. $activity->lecture->file_name. '"
+                            data="/uploads/lecture/' . $activity->lecture->file_name . '"
                             type="application/pdf"
                             width="100%"
                             height="500em"></object><br>' ?>
@@ -74,5 +80,5 @@
         <?php include('partials/right-side-notifications.php'); ?>
     </div>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </html>
