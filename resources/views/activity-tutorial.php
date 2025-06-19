@@ -72,10 +72,10 @@
                                     <h5><b>Video Tutorial: <?= $activity->activity_name ?></b></h5>
                                 </div>
                             </div>
-                            <div class="return-prev-container">
-                                <?= '<a class="activity-link" href="/home-tutor/module/' . $activity->module_id . '/"> ' ?>
-                                <div class="return-prev"><- BACK to Module Page</div>
-                                        </a>
+                            <div class="return-prev-cont">
+                                <?= '<a class="activity-link" href="/home-tutor/module/' . $activity->module_id . '/">
+                                <div class="return-prev">BACK to Module Page</div>
+                                        </a>' ?>
                                 </div>
                             </div>
                         </div>
